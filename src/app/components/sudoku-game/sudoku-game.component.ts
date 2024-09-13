@@ -1,23 +1,27 @@
 import { Component, inject } from '@angular/core';
 import { SudokuService } from '../../services/sudoku.service';
 import { take } from 'rxjs';
-import { Board, BoardResponse, Difficulty } from '../../models/sudoku.model';
+import { Board, BoardResponse, Difficulty, SolveResponse } from '../../models/sudoku.model';
+import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-sudoku-game',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './sudoku-game.component.html',
   styleUrl: './sudoku-game.component.scss'
 })
 export class SudokuGameComponent {
+
   private sudokuService: SudokuService = inject(SudokuService);
+  private toastrService: ToastrService = inject(ToastrService);
 
 
   ngOnInit() {
     this.onloadData();
   }
-  
+
   onloadData() {
     this.generateSudoku('easy');
   }
@@ -29,9 +33,45 @@ export class SudokuGameComponent {
         this.board = response.board;
       },
       (error: any) => {
-        console.error('Error generating Sudoku:', error);
+        this.toastrService.error('Error generating Sudoku', 'Error');
       }
     );
   }
-}
 
+
+  validateSudoku() {
+    this.sudokuService.validateSudoku(this.board).pipe(take(1)).subscribe(
+      (response) => {
+        if (response.status === 'solved') {
+          this.toastrService.success('Sudoku is valid and solved!', 'Success');
+        } else if (response.status === 'broken') {
+          this.toastrService.info('Sudoku is valid but not yet solved.', 'Info');
+        } else {
+          this.toastrService.warning('Sudoku is invalid.', 'Warning');
+        }
+      },
+      (error) => {
+        this.toastrService.error('Error validating Sudoku', 'Error');
+      }
+    );
+  }
+
+  solveSudoku() {
+    this.sudokuService.solveSudoku(this.board).pipe(take(1)).subscribe(
+      (response: SolveResponse) => {
+        if (response.status === 'solved') {
+          this.board = response.solution;
+          this.toastrService.success('Sudoku solved successfully!', 'Success');
+        } else if (response.status === 'broken') {
+          this.toastrService.warning('Sudoku is invalid or unsolvable.', 'Warning');
+        } else {
+          this.toastrService.error('Unable to solve Sudoku.', 'Error');
+        }
+      },
+      (error) => {
+        this.toastrService.error('Error solving Sudoku', 'Error');
+      }
+    );
+  }
+
+}
