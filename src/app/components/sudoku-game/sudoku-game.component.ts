@@ -31,7 +31,6 @@ export class SudokuGameComponent {
   board: Board = [];
   selectedDifficulty: Difficulty = 'easy';
   generateSudoku(difficulty: Difficulty): void {
-    debugger
     this.sudokuService.generateSudoku(difficulty).pipe(take(1)).subscribe(
       (response: BoardResponse) => {
         this.board = response.board;
