@@ -3,11 +3,15 @@ import { LayoutComponent } from './components/layout/layout.component';
 export const routes: Routes = [
     {
       path: '',
-      loadComponent: () =>
-        import('./components/layout/layout.component').then(
-          (c) => c.LayoutComponent
-        )
-
+      component: LayoutComponent,
+        children: [
+            {
+                path: '',
+                loadComponent: () =>
+                import('./components/sudoku-game/sudoku-game.component').then(
+                    (c) => c.SudokuGameComponent
+                ),
+            }
+        ]
     },
-
   ];

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SudokuBoardComponent } from './sudoku-board.component';
+import { SudokuGameComponent } from './sudoku-game.component';
 
-describe('SudokuBoardComponent', () => {
-  let component: SudokuBoardComponent;
-  let fixture: ComponentFixture<SudokuBoardComponent>;
+describe('SudokuGameComponent', () => {
+  let component: SudokuGameComponent;
+  let fixture: ComponentFixture<SudokuGameComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SudokuBoardComponent]
+      imports: [SudokuGameComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SudokuBoardComponent);
+    fixture = TestBed.createComponent(SudokuGameComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
