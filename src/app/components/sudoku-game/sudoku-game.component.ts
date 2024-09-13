@@ -5,16 +5,17 @@ import { Board, BoardResponse, Difficulty, SolveResponse } from '../../models/su
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
+import { ValidSudokuNumberDirective } from '../../directives/valid-sudoku-number.directive';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @Component({
   selector: 'app-sudoku-game',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ValidSudokuNumberDirective,NgxSkeletonLoaderModule],
   templateUrl: './sudoku-game.component.html',
-  styleUrl: './sudoku-game.component.scss'
+  styleUrls: ['./sudoku-game.component.scss']
 })
 export class SudokuGameComponent {
-
   private sudokuService: SudokuService = inject(SudokuService);
   private toastrService: ToastrService = inject(ToastrService);
  

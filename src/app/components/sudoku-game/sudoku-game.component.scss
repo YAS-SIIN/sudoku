@@ -1,0 +1,35 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr); // Create 9 equal columns
+    grid-template-rows: repeat(9, 1fr); // Create 9 equal rows
+    gap: 2px; // Optional: Add some spacing between cells
+    max-width: 500px; // Optional: Set a max width for the grid
+    margin: 20px auto; // Center the grid horizontally on the page
+    opacity: 0.85;
+    transition: all 4s cubic-bezier(0.26, -0.65, 0.29, 1.72);
+  }
+  
+  .grid-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    &__input {
+      background-color: white;
+      text-align: center;
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      &[type="number"] {
+        -moz-appearance: textfield;
+      }
+    }
+  }
+ 

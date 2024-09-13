@@ -1,13 +1,13 @@
-<!-- Added Dropdown for Difficulty Selection -->
-<div class="container">
-  <div class="row mt-2">
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-3"></div>
     <div class="col-3">
       <label for="difficultySelect" class="form-label"
         >Select Difficulty:</label
       >
       <select
         id="difficultySelect"
-        class="form-select" aria-placeholder="Select Difficulty"
+        class="form-select"
         [(ngModel)]="selectedDifficulty"
       >
         <option value="easy">Easy</option>
@@ -16,13 +16,10 @@
         <option value="random">Random</option>
       </select>
     </div>
-
-    <div class="col-3">
-      <br />
+    <div class="col-3 d-flex align-items-end">
       <button
         type="button"
-        class="btn btn-primary mt-2"
-        aria-controls="collapseExample"
+        class="btn btn-primary"
         (click)="generateSudoku(selectedDifficulty)"
       >
         Generate Sudoku
@@ -30,36 +27,50 @@
     </div>
   </div>
 
-<div class="row mt-2">
-  <div *ngIf="board && board.length !== 0;else loader" class="container">
-    <div class="row g-0">
-      <div *ngFor="let row of board; let i = index" class="col-12">
-        <div class="row g-0">
-          <div *ngFor="let cell of row; let j = index" class="col-1">
-            <input
-              type="number"
-              [disabled]="cell != 0"
-              [value]="cell ? cell : ''"
-              class="form-control"
-              min="1"
-              max="9"
-            />
-          </div>
-        </div>
+  <!-- Sudoku Board -->
+  <div class="row mt-4">
+    <div *ngIf="board && board.length !== 0; else loader" class="col">
+      <div class="grid-container">
+        @for(row of board; track row; let rowIndex = $index){ 
+
+          @for (cell of row; track cell;let cellIndex = $index) {
+            
+            @if(cell != 0){
+            <div class="grid-item">{{ cell }}</div>
+            } @else {
+              <div>
+                <input
+                  type="number"
+                  min="1"
+                  max="9"
+                  [value]="''"
+                  class="grid-item form-control grid-item__input"
+                  appValidSudokuNumber
+                />
+              </div>
+            } 
+           } }
       </div>
     </div>
+    <!-- Loader -->
+    <ng-template #loader>
+      <div class="grid-container">
+        @for (i of [1,2,3,4,5,6,7,8,9]; track $index) {
+        <div class="mt-1">
+          <ngx-skeleton-loader
+            count="9"
+            animation="pulse"
+            [theme]="{ 'border-radius': '5px', height: '40px' }"
+          />
+        </div>
+        }
+      </div>
+    </ng-template>
   </div>
- 
-  <ng-template #loader>
-    <div class="spinner-border" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-  </ng-template>
-</div>
 
-  <div class="row mt-2">
- 
-    <div class="col-2 text-center">
+  <!-- Control Buttons -->
+  <div class="row mt-4">
+    <div class="col text-center">
       <button
         type="button"
         class="btn btn-success me-2"
@@ -67,8 +78,6 @@
       >
         Solve Sudoku
       </button>
-    </div>
-    <div class="col-2 text-center">
       <button type="button" class="btn btn-info" (click)="validateSudoku()">
         Validate Sudoku
       </button>
