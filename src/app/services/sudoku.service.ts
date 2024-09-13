@@ -16,12 +16,16 @@ export class SudokuService {
       params: { difficulty }
     });
   }
-
+  
   validateSudoku(board: Board): Observable<ValidateResponse> {
-    return this.http.post<ValidateResponse>(`${this.apiUrl}/validate`, { board });
+    const formData = new FormData();
+    formData.append('board', JSON.stringify(board));
+    return this.http.post<ValidateResponse>(`${this.apiUrl}/validate`, formData);
   }
 
   solveSudoku(board: Board): Observable<SolveResponse> {
-    return this.http.post<SolveResponse>(`${this.apiUrl}/solve`, { board });
+    const formData = new FormData();
+    formData.append('board', JSON.stringify(board));
+    return this.http.post<SolveResponse>(`${this.apiUrl}/solve`, formData);
   }
 }

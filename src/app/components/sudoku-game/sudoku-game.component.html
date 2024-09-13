@@ -1,13 +1,25 @@
 
+<!-- Added Dropdown for Difficulty Selection -->
+<div class="mb-3">
+  <label for="difficultySelect" class="form-label">Select Difficulty:</label>
+  <select id="difficultySelect" class="form-select" [(ngModel)]="selectedDifficulty">   
+
+    <option value="easy">Easy</option>
+    <option value="medium">Medium</option>
+    <option value="hard">Hard</option>
+    <option value="random">Random</option>
+  </select>
+</div>
 
 <button
   type="button"
   class="btn btn-outline-primary ms-2 mb-3"
   aria-controls="collapseExample"
+  (click)="generateSudoku(selectedDifficulty)" 
 >
   Generate Sudoku
 </button>
- 
+
 <div *ngIf="board" class="container">
   <div class="row g-0">
     <div *ngFor="let row of board; let i = index" class="col-12">
@@ -24,7 +36,7 @@
   <button
     type="button"
     class="btn btn-outline-success me-2"
-    (click)="solveSudoku()"
+    (click)="solveSudoku()" 
   >
     Solve Sudoku
   </button>

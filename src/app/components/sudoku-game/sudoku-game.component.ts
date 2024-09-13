@@ -4,11 +4,12 @@ import { take } from 'rxjs';
 import { Board, BoardResponse, Difficulty, SolveResponse } from '../../models/sudoku.model';
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-sudoku-game',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './sudoku-game.component.html',
   styleUrl: './sudoku-game.component.scss'
 })
@@ -16,6 +17,7 @@ export class SudokuGameComponent {
 
   private sudokuService: SudokuService = inject(SudokuService);
   private toastrService: ToastrService = inject(ToastrService);
+ 
 
 
   ngOnInit() {
@@ -27,7 +29,9 @@ export class SudokuGameComponent {
   }
 
   board: Board = [];
+  selectedDifficulty: Difficulty = 'easy';
   generateSudoku(difficulty: Difficulty): void {
+    debugger
     this.sudokuService.generateSudoku(difficulty).pipe(take(1)).subscribe(
       (response: BoardResponse) => {
         this.board = response.board;
