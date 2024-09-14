@@ -7,9 +7,15 @@
     margin: 20px auto;
     opacity: 0.85;
     transition: all 4s cubic-bezier(0.26, -0.65, 0.29, 1.72);
-  }
-  
-  .shared-cell {
+    animation: fadeIn 0.5s ease-in-out; // Add fade-in effect
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.table-cell {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,47 +29,66 @@
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     color: yellow;
     margin: 1px;
-  }
-  
-  .table-input {
+}
+
+.table-input {
     background-color: white;
     text-align: center;
     padding: 10px;
     color: inherit;
     text-shadow: inherit;
-  }
-  
-  .table-input::-webkit-outer-spin-button,
-  .table-input::-webkit-inner-spin-button {
+}
+
+.table-input::-webkit-outer-spin-button,
+.table-input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-  }
-  
-  .table-input[type="number"] {
+}
+
+.table-input[type="number"] {
     -moz-appearance: textfield;
-  }
-  
- 
- 
-  table {
+}
+
+table {
     margin:1em auto;
     opacity: 0.85;
     transition: all 4s cubic-bezier(0.26, -0.65, 0.29, 1.72);
-  }
-  td {
+}
+
+td {
     height:50px;
     width:50px;
     text-align:center;
-  }
-  td:first-child {
+}
+
+td:first-child {
     margin-left: 50px;
-  }
-  td:nth-child(3n) {
+}
+
+td:nth-child(3n) {
     margin-right: 50px;
-  }
-  tr:first-child {
+}
+
+tr:first-child {
     margin-top: 50px;
-  }
-  tr:nth-child(3n) td {
+}
+
+tr:nth-child(3n) td {
     margin-bottom: 50px;
-  }
+}
+
+.form-floating {
+    width: 100%; // Make it responsive
+    max-width: 200px; // Limit max width
+}
+
+.btn {
+    width: 100%; // Make buttons full width
+    max-width: 150px; // Limit max width
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn:hover {
+    background-color: #0056b3; // Darker shade for hover
+    transform: scale(1.05); // Slightly enlarge on hover
+}
