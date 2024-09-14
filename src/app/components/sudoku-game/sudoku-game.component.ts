@@ -25,12 +25,21 @@ export class SudokuGameComponent {
     this.onloadData();
   }
 
+  /**
+   * Initializes a Sudoku board with 'easy' difficulty.
+   */
   onloadData() {
     this.generateSudoku('easy');
   }
 
   board: Board = [];
   selectedDifficulty: Difficulty = 'easy';
+  
+  /**
+   * Generates a Sudoku board based on the specified difficulty.
+   * 
+   * @param difficulty The difficulty level of the Sudoku board to generate.
+   */
   generateSudoku(difficulty: Difficulty): void {
     this.sudokuService.generateSudoku(difficulty).pipe(take(1)).subscribe(
       (response: BoardResponse) => {
@@ -42,7 +51,9 @@ export class SudokuGameComponent {
     );
   }
 
-
+  /**
+   * Validates the current Sudoku board and displays the validation result.
+   */
   validateSudoku() {
     this.sudokuService.validateSudoku(this.board).pipe(take(1)).subscribe(
       (response) => {
@@ -60,6 +71,10 @@ export class SudokuGameComponent {
     );
   }
 
+
+  /**
+   * Solves the current Sudoku board and updates the board with the solution.
+   */
   solveSudoku() {
     this.sudokuService.solveSudoku(this.board).pipe(take(1)).subscribe(
       (response: SolveResponse) => {

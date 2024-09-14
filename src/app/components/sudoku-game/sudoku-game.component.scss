@@ -1,10 +1,10 @@
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(9, 1fr); // Create 9 equal columns
-    grid-template-rows: repeat(9, 1fr); // Create 9 equal rows
-    gap: 2px; // Optional: Add some spacing between cells
-    max-width: 500px; // Optional: Set a max width for the grid
-    margin: 20px auto; // Center the grid horizontally on the page
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: repeat(9, 1fr);
+    gap: 2px;
+    max-width: 500px;
+    margin: 20px auto;
     opacity: 0.85;
     transition: all 4s cubic-bezier(0.26, -0.65, 0.29, 1.72);
   }
@@ -19,6 +19,10 @@
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: fantasy;
+    text-decoration: underline;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    color: yellow;
     &__input {
       background-color: white;
       text-align: center;
@@ -33,3 +37,26 @@
     }
   }
  
+ 
+  table {
+    margin:1em auto;
+    opacity: 0.85;
+    transition: all 4s cubic-bezier(0.26, -0.65, 0.29, 1.72);
+  }
+  td {
+    height:50px;
+    width:50px;
+    text-align:center;
+  }
+  td:first-child {
+    margin-left: 50px;
+  }
+  td:nth-child(3n) {
+    margin-right: 50px;
+  }
+  tr:first-child {
+    margin-top: 50px;
+  }
+  tr:nth-child(3n) td {
+    margin-bottom: 50px;
+  }

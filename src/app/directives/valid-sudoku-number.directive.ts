@@ -39,9 +39,11 @@ export class ValidSudokuNumberDirective {
   @HostListener('input', ['$event'])
   onInputChange(event: Event) {
     const inputValue: string = this.el.nativeElement.value;
-
-    if (inputValue === '' || inputValue === '0' || +inputValue > 9) {
+    if (inputValue === '' || inputValue === '0') {
       this.el.nativeElement.value = '';
+    }
+    if (+inputValue > 9) {
+      this.el.nativeElement.value = inputValue.substring(0,1);
     }
   }
 }
