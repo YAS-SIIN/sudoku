@@ -1,58 +1,31 @@
 <div class="container mt-2">
-  <div class="row">
-    <div class="col-3"></div>
-    <div class="col-3">
-      <label for="difficultySelect" class="form-label"
-        >Select Difficulty:</label
-      >
-      <select
-        id="difficultySelect"
-        class="form-select"
-        [(ngModel)]="selectedDifficulty"
-      >
-        <option value="easy">Easy</option>
-        <option value="medium">Medium</option>
-        <option value="hard">Hard</option>
-        <option value="random">Random</option>
-      </select>
-    </div>
-    <div class="col-3 d-flex align-items-end">
-      <button
-        type="button"
-        class="btn btn-primary"
-        (click)="generateSudoku(selectedDifficulty)"
-      >
-        Generate Sudoku
-      </button>
-    </div>
-  </div>
-
-
+ 
+  <!-- Board -->
   <div class="row mt-2">
     <div *ngIf="board && board.length !== 0; else loader" class="col">
       <table>
         <ng-container *ngFor="let row of board; index as rowIndex">
           <tr>
             <ng-container *ngFor="let cell of row;index as cellIndex">
-              <td >
-                <div *ngIf="cell !== 0" class="grid-item">{{ cell }}</div>
-                <div *ngIf="cell === 0">
+              <td>
+                <div *ngIf="cell !== 0" class="shared-cell"><span style="padding: 10px;">{{ cell }}</span></div>
+                <div *ngIf="cell === 0" class="shared-cell">
                   <input
                     type="number"
                     min="1"
                     max="9"
                     [value]="''"
-                    class="grid-item form-control grid-item__input"
+                    class="table-input form-control"
                     appValidSudokuNumber
                   />
                 </div>
               </td>
-              <td *ngIf="(cellIndex + 1) %3 == 0" style="width: 1rem;"></td>
+              <td *ngIf="(cellIndex + 1) %3 == 0" style="width: 0.3rem;"></td>
 
 
             </ng-container>
           </tr>
-          <tr *ngIf="(rowIndex + 1) %3 == 0" style="height: 1rem;">
+          <tr *ngIf="(rowIndex + 1) %3 == 0" style="height: 0.3rem;">
           </tr>
         </ng-container>
       </table>
@@ -74,9 +47,31 @@
     </ng-template>
   </div>
 
+  <div class="row">
+    <div class="col text-center d-flex justify-content-center">
+      <div class="form-floating w-25">
+        <select class="form-select" id="floatingSelect" aria-label="Floating label select example"
+        [(ngModel)]="selectedDifficulty">
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+          <option value="random">Random</option>
+        </select>
+        <label for="floatingSelect">Select Difficulty</label>
+      </div>
+  
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="generateSudoku(selectedDifficulty)"
+      >
+        Generate Sudoku
+      </button>
+    </div>
+  </div>
 
   <!-- Control Buttons -->
-  <div class="row mt-1">
+  <div class="row mt-3">
     <div class="col text-center">
       <button
         type="button"

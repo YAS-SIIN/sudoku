@@ -9,33 +9,40 @@
     transition: all 4s cubic-bezier(0.26, -0.65, 0.29, 1.72);
   }
   
-  .grid-item {
+  .shared-cell {
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #f2f2f2;
     border: 1px solid #ccc;
     font-size: 16px;
-    padding: 10px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     font-family: fantasy;
     text-decoration: underline;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     color: yellow;
-    &__input {
-      background-color: white;
-      text-align: center;
-      &::-webkit-outer-spin-button,
-      &::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-      }
-      &[type="number"] {
-        -moz-appearance: textfield;
-      }
-    }
+    margin: 1px;
   }
+  
+  .table-input {
+    background-color: white;
+    text-align: center;
+    padding: 10px;
+    color: inherit;
+    text-shadow: inherit;
+  }
+  
+  .table-input::-webkit-outer-spin-button,
+  .table-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  .table-input[type="number"] {
+    -moz-appearance: textfield;
+  }
+  
  
  
   table {
